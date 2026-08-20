@@ -1,0 +1,16 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      ABEER_ENV: ${ABEER_ENV:-development}
+      ABEER_COOKIE_SECURE: ${ABEER_COOKIE_SECURE:-0}
+    ports:
+      - "8000:8000"
+    volumes:
+      - abeer_data:/app/instance
+
+volumes:
+  abeer_data:

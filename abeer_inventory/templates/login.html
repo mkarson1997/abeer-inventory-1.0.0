@@ -1,0 +1,11 @@
+{% extends 'base.html' %}{% block title %}{{ t.login }} · {{ t.brand }}{% endblock %}{% block content %}
+<section class="auth-card">
+  <div class="logo-large">ع</div><h1>{{ t.brand }}</h1><p class="muted">Secure open-source inventory management</p>
+  <form method="post" class="stack">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="next" value="{{ request.args.get('next','') }}">
+    <label>{{ t.username }}<input name="username" autocomplete="username" maxlength="64" required autofocus></label>
+    <label>{{ t.password }}<input type="password" name="password" autocomplete="current-password" maxlength="256" required></label>
+    <button class="btn primary" type="submit">{{ t.login }}</button>
+  </form>
+  {% if config.ALLOW_REGISTRATION %}<p><a href="{{ url_for('auth.register') }}">{{ t.register }}</a></p>{% endif %}
+</section>{% endblock %}

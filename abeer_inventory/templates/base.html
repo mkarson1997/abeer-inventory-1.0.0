@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="{{ lang }}" dir="{{ 'rtl' if rtl else 'ltr' }}" data-theme="{{ theme }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>{% block title %}{{ t.brand }}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+{% if current_user %}
+<header class="topbar">
+  <a class="brand" href="{{ url_for('inventory.dashboard') }}"><span class="brand-mark">ع</span><span>{{ t.brand }}</span></a>
+  <button class="menu-button" type="button" data-menu-toggle aria-label="Menu">☰</button>
+  <nav class="nav" data-menu>
+    <a href="{{ url_for('inventory.dashboard') }}">{{ t.dashboard }}</a>
+    <a href="{{ url_for('inventory.products') }}">{{ t.products }}</a>
+    <a href="{{ url_for('inventory.alerts') }}">{{ t.alerts }}</a>
+    <a href="{{ url_for('inventory.movements') }}">{{ t.movements }}</a>
+    {% if current_user.role == 'admin' %}<a href="{{ url_for('admin.users') }}">{{ t.users }}</a>{% endif %}
+  </nav>
+  <div class="top-actions">
+    <form class="prefs" method="post" action="{{ url_for('preferences') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <select name="lang" aria-label="{{ t.language }}" data-auto-submit>
+        <option value="ar" {% if lang=='ar' %}selected{% endif %}>العربية</option>
+        <option value="tr" {% if lang=='tr' %}selected{% endif %}>Türkçe</option>
+        <option value="en" {% if lang=='en' %}selected{% endif %}>English</option>
+      </select>
+      <select name="theme" aria-label="{{ t.theme }}" data-auto-submit>
+        <option value="light" {% if theme=='light' %}selected{% endif %}>☀</option>
+        <option value="dark" {% if theme=='dark' %}selected{% endif %}>🌙</option>
+      </select>
+    </form>
+    <span class="user-pill">{{ current_user.username }} · {{ current_user.role }}</span>
+    <form method="post" action="{{ url_for('auth.logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn ghost" type="submit">{{ t.logout }}</button></form>
+  </div>
+</header>
+{% endif %}
+<main class="container {% if not current_user %}auth-shell{% endif %}">
+  {% with messages=get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flash-stack">{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}{% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>
