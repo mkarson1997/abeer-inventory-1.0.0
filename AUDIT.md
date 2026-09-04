@@ -65,6 +65,21 @@
 - اختبار أداة النقل على `stok.db` الأصلية: استيراد 4/4 منتجات، 0 مستخدم قديم، `PRAGMA integrity_check = ok`.
 - فحص أن النسخة العامة لا تتضمن قاعدة البيانات القديمة أو credentials أو `venv` يتم كـ Release Gate قبل إنشاء ZIP.
 
+## وثائق الأمن والقرارات المعمارية
+
+لجعل المراجعة الهندسية قابلة للتتبع بدل الاكتفاء بوصف الميزات، أضيفت وثائق مخصصة لحدود الثقة والقرارات الحساسة:
+
+- [Threat Model](docs/THREAT_MODEL.md) — الأصول الحساسة، حدود الثقة، سيناريوهات الإساءة، الضوابط والمخاطر المتبقية.
+- [Architecture Decision Records](docs/adr/README.md) — فهرس القرارات المعمارية والأمنية المقبولة.
+- [ADR-001: Server-side roles and restricted registration](docs/adr/001-auth-and-roles.md)
+- [ADR-002: Store money as integer minor units](docs/adr/002-money-minor-units.md)
+- [ADR-003: Keep inventory valuation separated by currency](docs/adr/003-per-currency-valuation.md)
+- [ADR-004: Re-encode uploaded product images](docs/adr/004-image-reencoding.md)
+- [ADR-005: SQLite foreign keys and WAL mode](docs/adr/005-sqlite-integrity.md)
+- [ADR-006: Backups exclude secrets and runtime configuration](docs/adr/006-backup-boundary.md)
+
+هذه الوثائق لا تدّعي أن النظام خالٍ من المخاطر؛ هدفها إظهار سبب اتخاذ القرارات، البدائل التي رُفضت، والآثار المترتبة عليها لتسهيل مراجعة الكود والتهديدات لاحقاً.
+
 ## ملاحظة
 
 اختبارات المصدر في بيئة التدقيق شُغّلت باستخدام Flask المتاح داخل الأرشيف القديم بسبب عدم توفر اتصال حزم خارجي في بيئة التنفيذ. ملف المشروع نفسه يطلب إصدار Flask الآمن المحدد في `pyproject.toml` عند التثبيت الطبيعي.
