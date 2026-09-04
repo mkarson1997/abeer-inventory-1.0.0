@@ -1,0 +1,24 @@
+name: Feature request
+description: Suggest a focused inventory, security, or operations improvement
+title: "feat: "
+labels: []
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What inventory, security, audit, backup, multilingual, or operator problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the desired behavior and any data or permission impact.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Optional trade-offs, migration concerns, or implementation notes.
