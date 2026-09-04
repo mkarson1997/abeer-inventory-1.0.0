@@ -1,5 +1,7 @@
 # Code of Conduct
 
-Be respectful, constructive, and focused on improving the project. Harassment, discrimination,
-threats, doxxing, and deliberate disruption are not accepted. Maintainers may remove content or
-participation that violates these expectations.
+We are committed to a respectful, professional, and harassment-free open-source community.
+
+Be constructive in technical disagreement, focus criticism on ideas and code, protect private or sensitive data, and assume contributors are collaborating in good faith. Harassment, threats, discriminatory abuse, or publishing another person's private information are not acceptable.
+
+Project maintainers may remove content or restrict participation when needed to protect the community.
