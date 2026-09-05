@@ -46,13 +46,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Require successful lint and test jobs
-        env:
-          LINT_RESULT: ${{ needs.lint.result }}
-          TEST_RESULT: ${{ needs.test.result }}
-        run: |
-          if [ "$LINT_RESULT" != "success" ] || [ "$TEST_RESULT" != "success" ]; then
-            echo "lint=$LINT_RESULT test=$TEST_RESULT"
-            exit 1
-          fi
-          echo "Lint and test matrix passed."
+      - name: Confirm successful lint and test jobs
+        if: ${{ needs.lint.result == 'success' && needs.test.result == 'success' }}
+        run: echo "Lint and test matrix passed."
+
+      - name: Fail when lint or tests did not succeed
+        if: ${{ needs.lint.result != 'success' || needs.test.result != 'success' }}
+        run: exit 1
