@@ -38,3 +38,21 @@ jobs:
       - run: pip install -e '.[dev]'
       - run: python -m compileall -q abeer_inventory tests wsgi.py
       - run: pytest
+
+  ci-gate:
+    name: CI Gate
+    if: ${{ always() }}
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require successful lint and test jobs
+        env:
+          LINT_RESULT: ${{ needs.lint.result }}
+          TEST_RESULT: ${{ needs.test.result }}
+        run: |
+          if [ "$LINT_RESULT" != "success" ] || [ "$TEST_RESULT" != "success" ]; then
+            echo "lint=$LINT_RESULT test=$TEST_RESULT"
+            exit 1
+          fi
+          echo "Lint and test matrix passed."
