@@ -14,7 +14,7 @@ dependencies = [
   "Flask>=3.1.3,<4",
   "Pillow>=11.3,<13",
   "openpyxl>=3.1.5,<4",
-  "reportlab>=4.4,<5",
+  "reportlab>=4.4,<6",
   "arabic-reshaper>=3.0.0,<4",
   "python-bidi>=0.6.6,<1",
 ]
