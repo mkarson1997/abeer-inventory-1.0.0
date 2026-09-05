@@ -23,7 +23,7 @@ dependencies = [
 dev = [
   "pytest>=8.4,<10",
   "pytest-cov>=6.2,<8",
-  "ruff==0.16.2",
+  "ruff==0.16.5",
 ]
 prod = ["gunicorn>=23,<24; platform_system != 'Windows'"]
 
