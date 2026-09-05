@@ -25,7 +25,7 @@ dev = [
   "pytest-cov>=6.2,<8",
   "ruff==0.16.2",
 ]
-prod = ["gunicorn>=23,<24; platform_system != 'Windows'"]
+prod = ["gunicorn>=23,<27; platform_system != 'Windows'"]
 
 [tool.setuptools]
 include-package-data = true
